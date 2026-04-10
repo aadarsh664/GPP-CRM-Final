@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, RefreshCw, Circle, Star } from 'lucide-react';
+import { Menu, RefreshCw, Circle, Ban, Filter } from 'lucide-react';
 import LeadsTab from '../components/LeadsTab';
 import VisitTab from '../components/VisitTab';
 import ClientsTab from '../components/ClientsTab';
@@ -12,7 +12,11 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState<'leads' | 'visit' | 'clients'>('leads');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const [showSubdivisions, setShowSubdivisions] = useState(false);
   const navigate = useNavigate();
+  const { visits, selectedSubdivisions, toggleSubdivision } = useAppStore();
+
+  const allSubdivisions = Array.from(new Set(visits.map(v => v.subdivision)));
 
   const handleRefresh = () => {
     setToast('No new leads added yet.');
@@ -58,8 +62,8 @@ export default function Dashboard() {
           <div className="mb-8 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
             <div className="flex justify-between items-center mb-4">
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Your Profile</p>
-              <Star 
-                className="w-4 h-4 cursor-pointer text-gray-400 hover:text-yellow-500 transition-colors" 
+              <Ban 
+                className="w-4 h-4 cursor-pointer text-gray-400 hover:text-red-500 transition-colors" 
                 onClick={() => navigate('/unavailability')}
               />
             </div>
@@ -109,6 +113,32 @@ export default function Dashboard() {
             <h1 className="font-bold text-2xl capitalize text-gray-900">{activeTab}</h1>
           </div>
           <div className="flex items-center gap-4">
+            {activeTab === 'visit' && (
+              <div className="relative">
+                <button 
+                  onClick={() => setShowSubdivisions(!showSubdivisions)}
+                  className="p-2 border rounded-md hover:bg-gray-50 bg-white"
+                >
+                  <Filter className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+                </button>
+                {showSubdivisions && (
+                  <div className="absolute top-12 right-0 bg-white border rounded-lg shadow-lg p-2 z-20 w-48">
+                    <p className="text-xs text-gray-500 mb-2 px-2">Filter by subdivisions</p>
+                    {allSubdivisions.map(sub => (
+                      <label key={sub} className="flex items-center justify-between p-2 hover:bg-gray-50 rounded cursor-pointer">
+                        <span className="text-sm">{sub}</span>
+                        <input 
+                          type="checkbox" 
+                          checked={selectedSubdivisions.includes(sub)}
+                          onChange={() => toggleSubdivision(sub)}
+                          className="accent-black"
+                        />
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
             <button onClick={handleRefresh} className="hover:bg-gray-200 md:hover:bg-gray-100 p-2 rounded-full transition-colors">
               <RefreshCw className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
             </button>

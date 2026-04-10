@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useAppStore, VisitStatus } from '../store';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Filter } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function VisitTab() {
-  const { visits, leads } = useAppStore();
+  const { visits, leads, selectedSubdivisions } = useAppStore();
   const navigate = useNavigate();
   const [filter, setFilter] = useState<VisitStatus>('New Visit');
-  const [showSubdivisions, setShowSubdivisions] = useState(false);
-  const [selectedSubdivisions, setSelectedSubdivisions] = useState<string[]>([]);
+  const [selectedVisitId, setSelectedVisitId] = useState<string | null>(null);
+  const [showOutcomeModal, setShowOutcomeModal] = useState(false);
 
   const filteredVisits = visits.filter(v => {
     if (v.status !== filter) return false;
@@ -16,12 +17,16 @@ export default function VisitTab() {
     return true;
   });
 
-  const allSubdivisions = Array.from(new Set(visits.map(v => v.subdivision)));
+  const handleVisitDone = (visitId: string) => {
+    setSelectedVisitId(visitId);
+    setShowOutcomeModal(true);
+  };
 
-  const toggleSubdivision = (sub: string) => {
-    setSelectedSubdivisions(prev => 
-      prev.includes(sub) ? prev.filter(s => s !== sub) : [...prev, sub]
-    );
+  const handleOutcome = (outcome: 'Failed' | 'Confirm') => {
+    // Here you would typically update the store based on the outcome
+    console.log(`Visit ${selectedVisitId} outcome: ${outcome}`);
+    setShowOutcomeModal(false);
+    setSelectedVisitId(null);
   };
 
   return (
@@ -38,32 +43,6 @@ export default function VisitTab() {
             {status}
           </button>
         ))}
-      </div>
-
-      <div className="flex justify-end mb-4 md:mb-6 relative">
-        <button 
-          onClick={() => setShowSubdivisions(!showSubdivisions)}
-          className="p-2 border rounded-md hover:bg-gray-50 bg-white"
-        >
-          <Filter className="w-4 h-4" />
-        </button>
-
-        {showSubdivisions && (
-          <div className="absolute top-10 right-0 bg-white border rounded-lg shadow-lg p-2 z-20 w-48">
-            <p className="text-xs text-gray-500 mb-2 px-2">Filter by subdivisions</p>
-            {allSubdivisions.map(sub => (
-              <label key={sub} className="flex items-center justify-between p-2 hover:bg-gray-50 rounded cursor-pointer">
-                <span className="text-sm">{sub}</span>
-                <input 
-                  type="checkbox" 
-                  checked={selectedSubdivisions.includes(sub)}
-                  onChange={() => toggleSubdivision(sub)}
-                  className="accent-black"
-                />
-              </label>
-            ))}
-          </div>
-        )}
       </div>
 
       <div className="space-y-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 md:space-y-0">
@@ -92,29 +71,81 @@ export default function VisitTab() {
               <h3 className="font-semibold text-lg">{lead.name}</h3>
               <p className="text-xs text-gray-500 mb-4">{lead.address}</p>
 
-              <div className="flex gap-2">
+              <div className="grid grid-cols-3 gap-2 mb-2">
                 <button 
-                  className="flex-1 py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
+                  className="py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
                   onClick={() => window.location.href = `tel:${lead.phone.split(',')[0]}`}
                 >
                   Call
                 </button>
                 <button 
-                  className="flex-1 py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
+                  className="py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
                   onClick={() => window.open(lead.addressLink, '_blank')}
                 >
                   Open Map
                 </button>
                 <button 
-                  className="flex-1 py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
+                  className="py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
+                  onClick={() => handleVisitDone(visit.id)}
                 >
                   Visit Done
+                </button>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <button 
+                  className="py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
+                  onClick={() => navigate(`/quotation/${lead.id}`)}
+                >
+                  Send Quotation
+                </button>
+                <button 
+                  className="py-2 border border-gray-300 rounded-lg text-xs font-medium hover:bg-gray-50"
+                  onClick={() => navigate(`/schedule/${lead.id}`)}
+                >
+                  Reschedule
                 </button>
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Visit Done Modal */}
+      <AnimatePresence>
+        {showOutcomeModal && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+              onClick={() => setShowOutcomeModal(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: '-50%', x: '-50%' }}
+              animate={{ opacity: 1, scale: 1, y: '-50%', x: '-50%' }}
+              exit={{ opacity: 0, scale: 0.95, y: '-50%', x: '-50%' }}
+              className="fixed top-1/2 left-1/2 w-[90%] max-w-sm bg-white rounded-2xl p-6 z-50 shadow-xl"
+            >
+              <h3 className="text-center text-lg font-medium mb-6">Select the deal is:</h3>
+              <div className="flex gap-4">
+                <button 
+                  onClick={() => handleOutcome('Failed')}
+                  className="flex-1 py-3 border-2 border-black rounded-xl font-semibold hover:bg-gray-50 transition-colors"
+                >
+                  Failed
+                </button>
+                <button 
+                  onClick={() => handleOutcome('Confirm')}
+                  className="flex-1 py-3 bg-black text-white rounded-xl font-semibold hover:bg-gray-900 transition-colors"
+                >
+                  Confirm
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -41,12 +41,14 @@ interface AppState {
   clients: Client[];
   theme: 'light' | 'dark' | 'system';
   language: 'English' | 'Hindi' | 'Hinglish';
+  selectedSubdivisions: string[];
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
   setLanguage: (lang: 'English' | 'Hindi' | 'Hinglish') => void;
   updateLead: (id: string, data: Partial<Lead>) => void;
   addVisit: (visit: Visit) => void;
   updateVisit: (id: string, data: Partial<Visit>) => void;
   addClient: (client: Client) => void;
+  toggleSubdivision: (sub: string) => void;
 }
 
 const mockLeads: Lead[] = [
@@ -138,6 +140,7 @@ export const useAppStore = create<AppState>((set) => ({
   clients: mockClients,
   theme: 'light',
   language: 'English',
+  selectedSubdivisions: [],
   setTheme: (theme) => set({ theme }),
   setLanguage: (language) => set({ language }),
   updateLead: (id, data) => set((state) => ({
@@ -147,5 +150,10 @@ export const useAppStore = create<AppState>((set) => ({
   updateVisit: (id, data) => set((state) => ({
     visits: state.visits.map(v => v.id === id ? { ...v, ...data } : v)
   })),
-  addClient: (client) => set((state) => ({ clients: [...state.clients, client] }))
+  addClient: (client) => set((state) => ({ clients: [...state.clients, client] })),
+  toggleSubdivision: (sub) => set((state) => ({
+    selectedSubdivisions: state.selectedSubdivisions.includes(sub)
+      ? state.selectedSubdivisions.filter(s => s !== sub)
+      : [...state.selectedSubdivisions, sub]
+  }))
 }));

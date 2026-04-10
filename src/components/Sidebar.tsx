@@ -1,4 +1,4 @@
-import { X, Star, RefreshCw } from 'lucide-react';
+import { X, Ban, RefreshCw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store';
@@ -79,7 +79,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-2">
                   <p className="text-xs text-gray-500">Your Profile</p>
-                  <Star 
+                  <Ban 
                     className="w-5 h-5 cursor-pointer" 
                     onClick={() => { onClose(); navigate('/unavailability'); }}
                   />
