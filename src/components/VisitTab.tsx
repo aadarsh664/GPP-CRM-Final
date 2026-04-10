@@ -25,8 +25,8 @@ export default function VisitTab() {
   };
 
   return (
-    <div className="p-4">
-      <div className="flex gap-2 overflow-x-auto pb-2 mb-4 scrollbar-hide">
+    <div className="p-4 md:p-0">
+      <div className="flex gap-2 overflow-x-auto pb-2 mb-4 md:mb-6 scrollbar-hide">
         {(['New Visit', 'Rescheduled', 'Visit Done'] as VisitStatus[]).map(status => (
           <button
             key={status}
@@ -40,10 +40,10 @@ export default function VisitTab() {
         ))}
       </div>
 
-      <div className="flex justify-end mb-4 relative">
+      <div className="flex justify-end mb-4 md:mb-6 relative">
         <button 
           onClick={() => setShowSubdivisions(!showSubdivisions)}
-          className="p-2 border rounded-md hover:bg-gray-50"
+          className="p-2 border rounded-md hover:bg-gray-50 bg-white"
         >
           <Filter className="w-4 h-4" />
         </button>
@@ -66,7 +66,7 @@ export default function VisitTab() {
         )}
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 md:space-y-0">
         {filteredVisits.map(visit => {
           const lead = leads.find(l => l.id === visit.leadId);
           if (!lead) return null;

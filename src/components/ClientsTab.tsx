@@ -9,8 +9,8 @@ export default function ClientsTab() {
   const [filter, setFilter] = useState<'New Clients' | '<5 Days' | '<9Days'>('New Clients');
 
   return (
-    <div className="p-4">
-      <div className="flex gap-2 overflow-x-auto pb-2 mb-4 scrollbar-hide">
+    <div className="p-4 md:p-0">
+      <div className="flex gap-2 overflow-x-auto pb-2 mb-4 md:mb-6 scrollbar-hide">
         {(['New Clients', '<5 Days', '<9Days'] as const).map(status => (
           <button
             key={status}
@@ -24,7 +24,7 @@ export default function ClientsTab() {
         ))}
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 md:space-y-0">
         {clients.map(client => {
           const lead = leads.find(l => l.id === client.leadId);
           if (!lead) return null;

@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50 text-gray-900 font-sans max-w-md mx-auto relative shadow-xl overflow-hidden">
+      <div className="min-h-screen bg-gray-50 text-gray-900 font-sans w-full max-w-md md:max-w-full mx-auto relative shadow-xl md:shadow-none overflow-x-hidden">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />

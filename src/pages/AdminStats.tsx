@@ -43,8 +43,8 @@ export default function AdminStats() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <header className="p-4 flex items-center justify-between border-b border-gray-100">
+    <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+      <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-5xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
         <div className="flex items-center gap-2">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12L10 6V18L4 12Z" fill="black"/>
@@ -57,14 +57,14 @@ export default function AdminStats() {
         </div>
       </header>
 
-      <div className="p-4 flex-1 overflow-y-auto">
+      <div className="p-4 flex-1 overflow-y-auto bg-white md:max-w-5xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm">
         <div className="flex gap-2 mb-6">
           <button className="flex-1 py-1.5 border border-black bg-black text-white rounded-full text-xs">All Time</button>
           <button className="flex-1 py-1.5 border border-gray-300 rounded-full text-xs">Today</button>
           <button className="flex-1 py-1.5 border border-gray-300 rounded-full text-xs">Custom Date</button>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6">
           <StatCard title="Total Leads" value="856" />
           <StatCard title="Total New Leads" value="256" />
           <StatCard title="Total Pending Visits" value="19" />
@@ -81,7 +81,7 @@ export default function AdminStats() {
 
         <div className="border border-gray-200 rounded-xl p-4">
           <h3 className="text-xs text-gray-500 mb-4">Growth Chart</h3>
-          <div className="h-40 w-full">
+          <div className="h-40 md:h-80 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data}>
                 <Line type="monotone" dataKey="uv" stroke="#000" strokeWidth={2} dot={false} />

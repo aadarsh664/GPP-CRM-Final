@@ -5,8 +5,8 @@ export default function AllQuotations() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <header className="p-4 flex items-center justify-between border-b border-gray-100">
+    <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+      <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-4xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">All Quotations</span>
@@ -16,7 +16,7 @@ export default function AllQuotations() {
         </div>
       </header>
 
-      <div className="p-4 flex-1 overflow-y-auto">
+      <div className="p-4 flex-1 overflow-y-auto bg-white md:max-w-4xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm md:p-6">
         <div className="flex gap-2 mb-6">
           <button className="flex-1 py-1.5 border border-black bg-black text-white rounded-full text-xs">All Time</button>
           <button className="flex-1 py-1.5 border border-gray-300 rounded-full text-xs">Today</button>
@@ -26,7 +26,7 @@ export default function AllQuotations() {
           </button>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
           {[1, 2, 3].map((item) => (
             <div key={item} className="border border-gray-200 rounded-xl p-4 bg-white">
               <div className="flex justify-between items-start mb-2">

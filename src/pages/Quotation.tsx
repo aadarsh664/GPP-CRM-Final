@@ -31,8 +31,8 @@ export default function Quotation() {
 
   if (step === 2) {
     return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <header className="p-4 flex items-center justify-between border-b border-gray-100">
+      <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+        <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-3xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => setStep(1)}>
             <ArrowLeft className="w-5 h-5" />
             <span className="font-medium">Back</span>
@@ -43,7 +43,7 @@ export default function Quotation() {
           </button>
         </header>
 
-        <div className="p-4 flex-1 overflow-y-auto bg-gray-50">
+        <div className="p-4 flex-1 overflow-y-auto bg-gray-50 md:max-w-3xl md:mx-auto md:w-full md:border-x">
           <div className="bg-white border border-gray-200 p-4 text-[10px]">
             <h2 className="text-center font-bold text-sm mb-4 border-b pb-2">Quotation</h2>
             
@@ -112,7 +112,7 @@ export default function Quotation() {
           </div>
         </div>
 
-        <div className="p-4 flex gap-4 bg-white border-t border-gray-100">
+        <div className="p-4 flex gap-4 bg-white border-t border-gray-100 md:max-w-3xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm">
           <button 
             className="flex-1 py-3 border border-black rounded-xl font-medium"
             onClick={() => setStep(1)}
@@ -131,8 +131,8 @@ export default function Quotation() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <header className="p-4 flex items-center justify-between border-b border-gray-100">
+    <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+      <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-3xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back</span>
@@ -143,7 +143,7 @@ export default function Quotation() {
         </div>
       </header>
 
-      <div className="p-4 flex-1 overflow-y-auto">
+      <div className="p-4 flex-1 overflow-y-auto bg-white md:max-w-3xl md:mx-auto md:w-full md:border-x">
         <div className="flex gap-2 mb-6">
           <div className="flex-1 relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -177,7 +177,7 @@ export default function Quotation() {
         </div>
       </div>
 
-      <div className="p-4 flex gap-4 border-t border-gray-100">
+      <div className="p-4 flex gap-4 border-t border-gray-100 bg-white md:max-w-3xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm">
         <button 
           className="flex-1 py-3 border border-black rounded-xl font-medium"
           onClick={() => setSelectedItems([])}

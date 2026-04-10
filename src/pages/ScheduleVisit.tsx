@@ -21,14 +21,14 @@ export default function ScheduleVisit() {
 
   if (showConfirm) {
     return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <header className="p-4 flex items-center justify-between border-b border-gray-100">
+      <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+        <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-3xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => setShowConfirm(false)}>
             <ArrowLeft className="w-5 h-5" />
             <span className="font-medium">Back</span>
           </div>
         </header>
-        <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
+        <div className="flex-1 flex flex-col items-center justify-center p-6 text-center bg-white md:max-w-3xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm">
           <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center mb-8">
             <Check className="w-12 h-12 text-white" />
           </div>
@@ -36,7 +36,7 @@ export default function ScheduleVisit() {
           <p className="text-gray-600 mb-2">Date: 7 Feb, 2026</p>
           <p className="text-gray-600 mb-12">Time: {selectedSlot || "14:00 to 15:00"}</p>
           <button 
-            className="w-full bg-black text-white rounded-xl py-4 font-medium text-lg"
+            className="w-full max-w-md bg-black text-white rounded-xl py-4 font-medium text-lg"
             onClick={() => navigate('/dashboard')}
           >
             Send Message
@@ -47,15 +47,15 @@ export default function ScheduleVisit() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <header className="p-4 flex items-center justify-between border-b border-gray-100">
+    <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+      <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-3xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back</span>
         </div>
       </header>
 
-      <div className="p-4 flex-1 flex flex-col">
+      <div className="p-4 flex-1 flex flex-col bg-white md:max-w-3xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm">
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-xl font-semibold mb-1">{lead.name}</h2>

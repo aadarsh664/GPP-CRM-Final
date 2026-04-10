@@ -19,8 +19,8 @@ export default function LeadDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <header className="p-4 flex items-center justify-between border-b border-gray-100">
+    <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+      <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-3xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back</span>
@@ -31,7 +31,7 @@ export default function LeadDetails() {
         </div>
       </header>
 
-      <div className="p-4 flex-1">
+      <div className="p-4 flex-1 bg-white md:max-w-3xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm">
         <div className="flex justify-between items-start mb-6">
           <div>
             <span className="text-xs font-medium px-2 py-0.5 bg-gray-100 rounded-md mb-1 inline-block">

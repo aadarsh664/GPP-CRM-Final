@@ -13,15 +13,15 @@ export default function Unavailability() {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <header className="p-4 flex items-center justify-between border-b border-gray-100">
+    <div className="min-h-screen bg-white flex flex-col md:bg-gray-50">
+      <header className="p-4 flex items-center justify-between border-b border-gray-100 bg-white md:max-w-3xl md:mx-auto md:w-full md:mt-8 md:rounded-t-2xl md:border-x md:border-t">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate(-1)}>
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Book Your Unavailability:</span>
         </div>
       </header>
 
-      <div className="p-4 flex-1 flex flex-col">
+      <div className="p-4 flex-1 flex flex-col bg-white md:max-w-3xl md:mx-auto md:w-full md:mb-8 md:rounded-b-2xl md:border-x md:border-b md:shadow-sm md:p-8">
         <p className="text-sm text-gray-600 mb-4">Select date that you will be unavailable:</p>
 
         <div className="border rounded-xl p-4 mb-6">
